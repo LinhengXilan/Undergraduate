@@ -1,0 +1,15 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="GUI/GUI.csproj">
+    <Platform Project="x64" />
+  </Project>
+  <Project Path="ImageCLR/ImageCLR.vcxproj">
+    <Build Solution="*|x86" Project="false" />
+  </Project>
+  <Project Path="ImageHandle/ImageHandle.vcxproj" Id="6ebf7e88-01b4-453f-996b-5df47f2e4bf9">
+    <Build Solution="*|x86" Project="false" />
+  </Project>
+</Solution>
