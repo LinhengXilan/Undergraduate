@@ -13,7 +13,7 @@
 	<SupportedOSPlatformVersion>10.0.22000.0</SupportedOSPlatformVersion>
 	<Platforms>x64</Platforms>
 	<UseCommonOutputDirectory>true</UseCommonOutputDirectory>
-	<IntermediateOutputPath>$(SolutionDir)obj\$(Configuration)\$(ProjectName)\</IntermediateOutputPath>
+	<IntermediateOutputPath>$(SolutionDir)obj\$(Configuration)\$(MSBuildProjectName)\</IntermediateOutputPath>
 	<OutputPath>$(BaseOutputPath)</OutputPath>
   </PropertyGroup>
 

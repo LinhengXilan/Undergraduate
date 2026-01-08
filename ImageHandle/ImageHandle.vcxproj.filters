@@ -21,10 +21,21 @@
     <ClInclude Include="Src\Core\Core.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Image\Image.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\pch.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Image\Image.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Src\Core\Core.inl">
+      <Filter>头文件</Filter>
+    </None>
   </ItemGroup>
 </Project>

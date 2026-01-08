@@ -1,87 +1,58 @@
 /**
  * @file ImageCLR.cpp
  * @author LinhengXilan
- * @version 0.0.1
- * @date 2026-1-5
+ * @version 0.0.0.2
+ * @date 2026-1-8
  */
 
 #include <pch.h>
 using namespace System::Runtime::InteropServices;
 #include <ImageCLR.h>
 
-cv::Mat mat;
-
-ImageCLR::Point::Point()
-	: X(0), Y(0)
+namespace ImageCLR
 {
-
-}
-
-ImageCLR::Point::Point(int x, int y)
-	: X(x), Y(y)
-{
-
-}
-
-String^ ImageCLR::Point::ToString()
-{
-	return "(" + X + "," + Y + ")";
-}
-
-
-ImageCLR::ContourFinder::ContourFinder()
-{
-	
-}
-
-void ImageCLR::ContourFinder::LoadImage(String^ imagePath)
-{
-	IntPtr ptr = Marshal::StringToHGlobalAnsi(imagePath);
-	try
+	Image::Image()
 	{
-		const char* cstr = (const char*)ptr.ToPointer();
-		mat = cv::imread(cstr, 1);
-		if (mat.data == nullptr)
+		m_Image = new ImageHandle::Image();
+	}
+
+	void Image::LoadImage(String^ imagePath)
+	{
+		IntPtr ptr = Marshal::StringToHGlobalAnsi(imagePath);
+		try
 		{
-			throw gcnew System::Exception("Failed to load image.");
+			const char* cstr = (const char*)ptr.ToPointer();
+			m_Image->LoadImage(cstr);
+			int dataSize = m_Image->Size();
+			m_Data = gcnew array<Byte>(dataSize);
+			Marshal::Copy(IntPtr(m_Image->GetImage()->data), m_Data, 0, dataSize);
+			m_Width = m_Image->GetWidth();
+			m_Height = m_Image->GetHeight();
+			m_Stride = m_Image->GetStride();
+		}
+		finally
+		{
+			Marshal::FreeHGlobal(ptr);
 		}
 	}
-	finally
+
+	int Image::Width::get()
 	{
-		Marshal::FreeHGlobal(ptr);
+		return m_Width;
 	}
-}
 
-List<List<ImageCLR::Point^>^>^ ImageCLR::ContourFinder::FindContours(int thershold)
-{
-	cv::Mat cannyOutput;
-	std::vector<std::vector<cv::Point>> contours;
-	std::vector<cv::Vec4i> hierarchy;
-	cv::Canny(mat, cannyOutput, thershold, thershold * 2, 3);
-	cv::findContours(cannyOutput, contours, hierarchy, cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE, cv::Point(0, 0));
-	// Convert to CLR List
-	List<List<Point^>^>^ clrContours = gcnew List<List<Point^>^>(contours.size());
-	for (int i = 0; i < contours.size(); i++)
+	int Image::Height::get()
 	{
-		List<Point^>^ points = gcnew List<Point^>(contours[i].size());
-		for (int j = 0; j < contours[i].size(); j++)
-		{
-			Point^ point = gcnew Point();
-			point->X = contours[i][j].x;
-			point->Y = contours[i][j].y;
-			points->Add(point);
-		}
-		clrContours->Add(points);
+		return m_Height;
 	}
-	return clrContours;
-}
 
-int ImageCLR::ContourFinder::Cols::get()
-{
-	return mat.cols;
-}
+	int Image::Stride::get()
+	{
+		return m_Stride;
+	}
 
-int ImageCLR::ContourFinder::Rows::get()
-{
-	return mat.rows;
+	array<Byte>^ Image::Data::get()
+	{
+		return m_Data;
+	}
 }

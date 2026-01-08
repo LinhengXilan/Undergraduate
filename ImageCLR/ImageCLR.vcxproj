@@ -63,10 +63,10 @@
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>C:\Home\work\Undergraduate\Dependencies\OpenCV\include;C:\Home\work\Undergraduate\ImageCLR\Src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ImageHandle\Src;$(SolutionDir)Dependencies\OpenCV\include;$(SolutionDir)ImageCLR\Src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opencv_world4130.lib</AdditionalDependencies>
+      <AdditionalDependencies>opencv_world4130.lib;</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\OpenCV\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -78,10 +78,10 @@
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>C:\Home\work\Undergraduate\Dependencies\OpenCV\include;C:\Home\work\Undergraduate\ImageCLR\Src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ImageHandle\Src;$(SolutionDir)Dependencies\OpenCV\include;$(SolutionDir)ImageCLR\Src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opencv_world4130.lib</AdditionalDependencies>
+      <AdditionalDependencies>opencv_world4130.lib;</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\OpenCV\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
@@ -97,6 +97,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ImageHandle\ImageHandle.vcxproj">
+      <Project>{6ebf7e88-01b4-453f-996b-5df47f2e4bf9}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
