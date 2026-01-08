@@ -1,7 +1,7 @@
 /**
  * @file Image/Image.cpp
  * @author LinhengXilan
- * @version 0.0.0.2
+ * @version 0.0.0.3
  * @date 2026-1-8
  */
 
@@ -27,7 +27,7 @@ namespace ImageHandle
 
 	[[nodiscard]] int32_t Image::GetStride() const
 	{
-		return m_Image->channels() * m_Image->cols;
+		return m_Image->step;
 	}
 
 	[[nodiscard]] int32_t Image::Size() const

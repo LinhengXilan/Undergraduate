@@ -6,10 +6,25 @@
 		xmlns:local="clr-namespace:GUI"
 		mc:Ignorable="d"
 		Title="MainWindow" Height="720" Width="1280"
-		Loaded="MainWindow_OnLoaded"
 		Closed="MainWindow_OnClosed">
-	<DockPanel>
-		<TextBox Name="TextBoxFileInput"/>
-		<Image Name="ImageMat" Height="500" />
-	</DockPanel>
+	<StackPanel>
+		<Border Background="#ffffff" Padding="5" CornerRadius="15">
+			<Grid HorizontalAlignment="Stretch" Height="20">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="9*" />
+					<ColumnDefinition Width="1*" />
+				</Grid.ColumnDefinitions>
+
+				<TextBox Grid.Column="0" x:Name="Textbox_FilePath"/>
+				<Button Grid.Column="1" x:Name="OpenFileDialog" Content="打开文件" Click="OpenFileDialog_OnClick"/>
+			</Grid>
+		</Border>
+
+		<Grid>
+			<Grid.RenderTransform>
+				<ScaleTransform x:Name ="Image_PendingScale"/>
+			</Grid.RenderTransform>
+			<Image Name="Image_Pending" />
+		</Grid>
+	</StackPanel>
 </Window>
