@@ -1,8 +1,8 @@
 /**
  * @file ImageCLR.cpp
  * @author LinhengXilan
- * @version 0.0.0.2
- * @date 2026-1-8
+ * @version 0.0.0.5
+ * @date 2026-1-14
  */
 
 #include <pch.h>
@@ -11,24 +11,21 @@ using namespace System::Runtime::InteropServices;
 
 namespace ImageCLR
 {
-	Image::Image()
+	Processor::Processor()
 	{
-		m_Image = new ImageHandle::Image();
+		m_Processor = new ImageHandle::Processor();
 	}
 
-	void Image::LoadImage(String^ imagePath)
+	void Processor::LoadImage(String^ filepath)
 	{
-		IntPtr ptr = Marshal::StringToHGlobalAnsi(imagePath);
+		IntPtr ptr = Marshal::StringToHGlobalAnsi(filepath);
 		try
 		{
 			const char* cstr = (const char*)ptr.ToPointer();
-			m_Image->LoadImage(cstr);
-			int dataSize = m_Image->Size();
-			m_Data = gcnew array<Byte>(dataSize);
-			Marshal::Copy(IntPtr(m_Image->GetImage()->data), m_Data, 0, dataSize);
-			m_Width = m_Image->GetWidth();
-			m_Height = m_Image->GetHeight();
-			m_Stride = m_Image->GetStride();
+			m_Processor->GetOriginalImage()->LoadImage(cstr);
+			int dataSize = m_Processor->GetOriginalImage()->GetSize();
+			m_OriginalData = gcnew array<Byte>(dataSize);
+			Marshal::Copy(IntPtr(m_Processor->GetOriginalImage()->GetImage()->data), m_OriginalData, 0, dataSize);
 		}
 		finally
 		{
@@ -36,23 +33,41 @@ namespace ImageCLR
 		}
 	}
 
-	int Image::Width::get()
+	int Processor::Width::get()
 	{
-		return m_Width;
+		return m_Processor->GetOriginalImage()->GetWidth();
 	}
 
-	int Image::Height::get()
+	int Processor::Height::get()
 	{
-		return m_Height;
+		return m_Processor->GetOriginalImage()->GetHeight();
 	}
 
-	int Image::Stride::get()
+	int Processor::Stride::get()
 	{
-		return m_Stride;
+		return m_Processor->GetOriginalImage()->GetStride();
 	}
 
-	array<Byte>^ Image::Data::get()
+	bool Processor::IsProcessed::get()
 	{
-		return m_Data;
+		return m_Processor->IsProcessed();
+	}
+
+	array<Byte>^ Processor::OriginalData::get()
+	{
+		return m_OriginalData;
+	}
+	
+	array<Byte>^ Processor::ProcessedData::get()
+	{
+		int dataSize = m_Processor->GetProcessedImage()->GetSize();
+		m_ProcessedData = gcnew array<Byte>(dataSize);
+		Marshal::Copy(IntPtr(m_Processor->GetProcessedImage()->GetImage()->data), m_ProcessedData, 0, dataSize);
+		return m_ProcessedData;
+	}
+
+	void Processor::Start()
+	{
+		m_Processor->Start();
 	}
 }

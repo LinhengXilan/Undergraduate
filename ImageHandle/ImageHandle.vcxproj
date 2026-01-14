@@ -94,11 +94,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Core\Clock\Clock.h" />
+    <ClInclude Include="Src\Core\Clock\Timer.h" />
     <ClInclude Include="Src\Core\Core.h" />
+    <ClInclude Include="Src\Image\Processor.h" />
     <ClInclude Include="Src\pch.h" />
     <ClInclude Include="Src\Image\Image.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Core\Clock\Clock.cpp" />
+    <ClCompile Include="Src\Core\Clock\Timer.cpp" />
+    <ClCompile Include="Src\Image\Processor.cpp" />
     <ClCompile Include="Src\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>

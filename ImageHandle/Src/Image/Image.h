@@ -1,8 +1,8 @@
 /**
  * @file Image/Image.h
  * @author LinhengXilan
- * @version 0.0.0.2
- * @date 2026-1-8
+ * @version 0.0.0.5
+ * @date 2026-1-14
  */
 
 #ifndef IMAGE_IMAGE_H
@@ -17,7 +17,7 @@ namespace ImageHandle
 	class DLL Image
 	{
 	public:
-		Image() = default;
+		Image();
 		~Image() = default;
 
 	public:
@@ -25,16 +25,13 @@ namespace ImageHandle
 		[[nodiscard]] int32_t GetWidth() const;
 		[[nodiscard]] int32_t GetHeight() const;
 		[[nodiscard]] int32_t GetStride() const;
-		[[nodiscard]] int32_t Size() const;
+		[[nodiscard]] int32_t GetSize() const;
 
 	public:
-		void LoadImage(const std::string& imagePath)
-		{
-			m_Image = CreateObjectRef<cv::Mat>(cv::imread(imagePath, cv::IMREAD_COLOR_BGR));
-		}
+		void LoadImage(const std::string& imagePath);
 
 	private:
-		ObjectRef<cv::Mat> m_Image;
+		ObjectRef<cv::Mat>m_Image;
 	};
 }
 

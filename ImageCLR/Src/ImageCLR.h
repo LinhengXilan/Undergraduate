@@ -1,8 +1,8 @@
 /**
  * @file ImageCLR.h
  * @author LinhengXilan
- * @version 0.0.0.2
- * @date 2026-1-8
+ * @version 0.0.0.5
+ * @date 2026-1-14
  */
 
 #ifndef IMAGECLR_H
@@ -11,14 +11,14 @@
 using namespace System;
 using namespace System::Collections::Generic;
 
-#include <Image/Image.h>
+#include <Image/Processor.h>
 
 namespace ImageCLR
 {
-	public ref class Image
+	public ref class Processor
 	{
 	public:
-		Image();
+		Processor();
 
 	public:
 		property int Height
@@ -33,21 +33,27 @@ namespace ImageCLR
 		{
 			int get();
 		}
-		property array<Byte>^ Data
+		property bool IsProcessed
+		{
+			bool get();
+		}
+		property array<Byte>^ OriginalData
+		{
+			array<Byte>^ get();
+		}
+		property array<Byte>^ ProcessedData
 		{
 			array<Byte>^ get();
 		}
 
-	private:
-		// Backing fields for properties to avoid recursive calls
-		int m_Height;
-		int m_Width;
-		int m_Stride;
-		array<Byte>^ m_Data;
-		ImageHandle::Image* m_Image;
-
 	public:
-		void LoadImage(System::String^ imagePath);
+		void LoadImage(String^ filepath);
+		void Start();
+
+	private:
+		ImageHandle::Processor* m_Processor;
+		array<Byte>^ m_OriginalData;
+		array<Byte>^ m_ProcessedData;
 	};
 }
 

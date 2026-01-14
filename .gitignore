@@ -3,6 +3,7 @@ bin/
 obj/
 .vscode/
 Assets/
+Document/
 
 Dependencies/OpenCV/dll/
 Dependencies/OpenCV/lib/

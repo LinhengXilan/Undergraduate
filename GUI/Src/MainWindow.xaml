@@ -5,30 +5,38 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:GUI"
 		mc:Ignorable="d"
-		Title="MainWindow" Height="720" Width="1280"
-
-		Loaded="MainWindow_OnLoaded"
-		Closed="MainWindow_OnClosed">
+		Title="MainWindow"
+		Width="1292"
+		Height="542"
+		ResizeMode="NoResize"
+		Loaded="MainWindow_OnLoaded">
 
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="20"/>
 			<RowDefinition Height="20"/>
-			<RowDefinition Height="20"/>
-			<RowDefinition/>
+			<RowDefinition Height="482"/>
 			<RowDefinition Height="20"/>
 		</Grid.RowDefinitions>
-		
+
 		<StackPanel Grid.Row="0" Orientation="Horizontal">
-			<Button x:Name="OpenFileDialog" Content="文件" Click="OpenFileDialog_OnClick"/>
+			<Button Content="开始" Click="ButtonClick_Start"/>
+			<Button Content="结束" Click="ButtonClick_Stop"/>
+			<Button Content="单次处理" Click="ButtonClick_Stop"/>
 		</StackPanel>
 
-		<Grid Grid.Row="3">
-			<Grid.RenderTransform>
-				<ScaleTransform x:Name ="RenderTransformPendingScale"/>
-			</Grid.RenderTransform>
-			<Image Name="ImagePending" />
+		<StackPanel Grid.Row="1" Orientation="Horizontal">
+			<Button Content="加载图片" Click="ButtonClick_LoadImage"/>
+		</StackPanel>
+
+		<Grid Grid.Row="2" HorizontalAlignment="Left" Width="646">
+			<Image Name="ImageOriginal"/>
 		</Grid>
-		<TextBox Grid.Row="4" Name="TextBoxFileOpened"/>
+
+		<Grid Grid.Row="2" HorizontalAlignment="Right" Width="646">
+			<Image Name="ImageProcessed"/>
+		</Grid>
+
+		<TextBox Name="TextBoxOpenedFile" Grid.Row="3"/>
 	</Grid>
 </Window>

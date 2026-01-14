@@ -1,8 +1,8 @@
 /**
  * @file Image/Image.cpp
  * @author LinhengXilan
- * @version 0.0.0.3
- * @date 2026-1-8
+ * @version 0.0.0.5
+ * @date 2026-1-14
  */
 
 #include <pch.h>
@@ -10,6 +10,16 @@
 
 namespace ImageHandle
 {
+	Image::Image()
+	{
+		m_Image = CreateObjectRef<cv::Mat>();
+	}
+
+	void Image::LoadImage(const std::string& imagePath)
+	{
+		*m_Image = cv::imread(imagePath, cv::IMREAD_COLOR_BGR);
+	}
+
 	[[nodiscard]] ObjectRef<cv::Mat> Image::GetImage() const
 	{
 		return m_Image;
@@ -30,7 +40,7 @@ namespace ImageHandle
 		return m_Image->step;
 	}
 
-	[[nodiscard]] int32_t Image::Size() const
+	[[nodiscard]] int32_t Image::GetSize() const
 	{
 		return m_Image->rows * m_Image->cols * m_Image->channels();
 	}
